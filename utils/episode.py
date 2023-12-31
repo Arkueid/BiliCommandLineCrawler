@@ -1,22 +1,22 @@
 import os.path
 import re
-# import subprocess
 from .download import download
 from .source import get_videos_audios, get_videos_audios_by_ep_id
 from .page import get_page_by_bv
 from lxml.etree import HTML
 from . import BType
 
+
 class Episode:
 
-    def __init__(self, collection: str, title: str, cover: str, BV: str, p: int | None, cookie: str = "", btype: int = -1):
+    def __init__(self, collection: str, title: str, cover: str, BV: str, p: int | None, cookie: str = "",
+                 btype: int = -1):
         self.__height = None
         self.__collection = re.sub(r"[|\\/<>:*?\"\s]", "-", collection)
         self.__title = re.sub(r"[|\\/<>:*?\"\s]", "-", title)
         self.__cover = cover
         self.__BV = BV
         self.__p = p
-        page = ""
         if btype == BType.BANGUMI:
             self.__videos, self.__audios = get_videos_audios_by_ep_id(p, cookie=cookie)
         else:
@@ -57,13 +57,13 @@ class Episode:
             download(audio, ap)
         if video_flag:
             print("正在合并音频画面...")
-            cmd = f"ffmpeg -i {vp} -i {ap} -c copy {out} -loglevel quiet"
+            if os.path.exists("ffmpeg\\ffmpeg.exe"):
+                print("merge using local ffmpeg executable")
+                cmd = f".\\ffmpeg\\ffmpeg.exe -i {vp} -i {ap} -c copy {out} -loglevel quiet"
+            else:
+                print("merge using system ffmpeg executable")
+                cmd = f"ffmpeg -i {vp} -i {ap} -c copy {out} -loglevel quiet"
             os.system(cmd)
-            # p = subprocess.Popen(cmd, stdin=subprocess.PIPE, close_fds=True)
-            # p.communicate("y\n".encode())
-            # p.stdin.close()
-            # p.kill()
-            # p.wait()
             print("合成完毕!")
         if not frames_flag and video_flag:
             os.remove(vp)

@@ -1,10 +1,13 @@
 import pprint
-from .page import get_page_by_bv
-from .source import get_info, get_info_dict
+
 from lxml.etree import HTML
-from .episode import Episode
+
 from . import BType
+from .episode import Episode
 from .exceptions import EpisodeNotFound
+from .page import get_page_by_bv
+from .source import get_info
+
 
 class BV:
     cookie = ""
@@ -27,10 +30,12 @@ class BV:
         if self.__type == BType.COLLECTIONS:
             for i in self.__info['列表']:
                 if i['BV'] == self.__BV:
-                    return Episode(self.__info['合集名称'], i['标题'], i['封面'], self.__BV, None, cookie=self.cookie, btype=self.__type)
+                    return Episode(self.__info['合集名称'], i['标题'], i['封面'], self.__BV, None, cookie=self.cookie,
+                                   btype=self.__type)
         elif self.__type == BType.EPISODE:
             i = self.__info['列表'][0]
-            return Episode(self.__info['合集名称'], i['标题'], self.__info['封面'], self.__BV, i['页码'], cookie=self.cookie, btype=self.__type)
+            return Episode(self.__info['合集名称'], i['标题'], self.__info['封面'], self.__BV, i['页码'],
+                           cookie=self.cookie, btype=self.__type)
         elif self.__type == BType.BANGUMI:
             item = None
             for i in self.__info['列表']:
@@ -39,7 +44,8 @@ class BV:
                     break
             if item is None:
                 raise EpisodeNotFound
-            return Episode(self.__info['合集名称'], item['标题'], item['封面'], self.__BV, item['ep_id'], cookie=self.cookie, btype=self.__type)
+            return Episode(self.__info['合集名称'], item['标题'], item['封面'], self.__BV, item['ep_id'],
+                           cookie=self.cookie, btype=self.__type)
 
     def getEpisode(self, idx):
         ep = self.__info['列表'][idx]
@@ -62,7 +68,8 @@ class BV:
             bvid = ep['BV']
             p = ep['ep_id']
             cover = ep["封面"]
-        else: return None
+        else:
+            return None
         return Episode(collection, title, cover, bvid, p, self.cookie, btype=self.__type)
 
 

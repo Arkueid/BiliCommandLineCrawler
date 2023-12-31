@@ -24,42 +24,44 @@
 
 ### 示例：
 #### 1. 通过BV号直接下载视频:
-
-
-    $> python bili.py BV1u841157Us -v 
-
+```bash
+python bili.py BV1u841157Us -v 
+```
 或
-    
-    $> python bili.py BV1u841157Us --video
-
-#### 2. 通过BV号直接下载视频的音轨:  
-
-
-    $> python bili.py BV1u841157Us -a
-    
+```bash
+python bili.py BV1u841157Us --video
+```
+#### 2. 通过BV号直接下载视频的音轨:
+```bash
+python bili.py BV1u841157Us -a
+```
 或
-    
-    $> python bili.py BV1u841157Us --audio
+```bash
+python bili.py BV1u841157Us --audio
+```
 
 #### 3. 通过BV号直接下载视频封面
-
-    $> python bili.py BV1u841157Us -c
-
+```bash
+python bili.py BV1u841157Us -c
+```
 或
-
-    $> python bili.py BV1u841157Us --cover
+```bash
+python bili.py BV1u841157Us --cover
+```
 
 #### 4. 通过BV号直接下载视频画面（不含音轨）
-    
-    $> python bili.py BV1u841157Us -f
-
+```bash
+python bili.py BV1u841157Us -f
+```
 或
-    
-    $> python bili.py BV1u841157Us --frames
+```    
+python bili.py BV1u841157Us --frames
+```
 
 #### 5. 同时下载画面，音轨，视频，和封面
-
-    $> python bili.py BV1u841157Us -a -f -v -c
+```bash
+python bili.py BV1u841157Us -a -f -v -c
+```
 
 选项参数可随意组合
 
@@ -84,11 +86,11 @@
 使用 cookie 可以获得 720P 及以上分辨率的视频。
 
 ```bash
-path/to/BiliBiliDownloader> python bili.py BV1u841157Us -v --cookie path/to/cookie.txt
+python bili.py BV1u841157Us -v --cookie path/to/cookie.txt
 ```
 
 ### cookie.txt  
-* 浏览器访问 http://bilibili.com，右键菜单或按f12打开检查
+* 浏览器访问 http:\/\/bilibili.com，右键菜单或按f12打开检查
 * 在检查工具顶栏中找到 Application/应用 栏，在左边的 Cookies 中找到 https://www.bilibili.com 
 * 把右边的表格右键复制到 excel，在 excel 中删掉除 Name 和 Value 的其他所有列
 * excel 中进行字符串拼接成 "Name=Value;" 的形式；excel 拼接公式：<font style="color: green">**=A1&"="&B1&\";"**</font>
@@ -101,5 +103,5 @@ path/to/BiliBiliDownloader> python bili.py BV1u841157Us -v --cookie path/to/cook
 ## 打包
 
 ```bash
-path/to/BiliBiliDownloader> pyinstaller bili.spec
+pyinstaller bili.spec
 ```

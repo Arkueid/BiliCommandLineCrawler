@@ -9,10 +9,12 @@ class InvalidInput(Exception):
     def __init__(self):
         super().__init__("输入不合法")
 
+
 class InvalidCookiePath(Exception):
 
     def __init__(self):
-        super().__init__("cookie 文件应为文本格式")
+        super().__init__("cookie 文件应为txt格式")
+
 
 class EpisodeNotFound(Exception):
 

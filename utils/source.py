@@ -1,8 +1,8 @@
 import json
 from lxml.etree import HTML
 from . import BType
-import re
 import requests
+
 
 # 预处理
 def get_source_dict(source_page: HTML) -> dict:
@@ -22,19 +22,21 @@ def get_info_dict(source_page: HTML) -> dict:
         # with open("123.json", 'w', encoding='utf-8') as f:
         #     f.write(res_string)
     else:
-        res_string = res_ls[0].strip("window.__INITIAL_STATE__=").replace(";(function(){var s;(s=document.currentScript||document.scripts[document.scripts.length-1]).parentNode.removeChild(s);}());", "")
+        res_string = res_ls[0].strip("window.__INITIAL_STATE__=").replace(
+            ";(function(){var s;(s=document.currentScript||document.scripts["
+            "document.scripts.length-1]).parentNode.removeChild(s);}());")
     return json.loads(res_string)
 
 
-def parse_type(source_dict: dict)->int:
+def parse_type(source_dict: dict) -> int:
     if len(source_dict.get('sections', [])) > 0:
         return BType.COLLECTIONS  # 合集
     elif len(source_dict.get('videoData', {}).get('pages', [])) > 0:
         return BType.EPISODE  # 分集
     elif len(source_dict.get('props', {})
-                .get('pageProps', {})
-                .get('dehydratedState', {})
-                .get('queries', [])
+                     .get('pageProps', {})
+                     .get('dehydratedState', {})
+                     .get('queries', [])
              ) > 0:
         return BType.BANGUMI
 
@@ -57,6 +59,7 @@ def get_videos_audios(source_page: HTML):
     for i in js['data']['dash']['audio']:
         audios[i['codecs']] = i['base_url']
     return videos, audios
+
 
 def get_videos_audios_by_ep_id(ep_id: int, cookie: str = ""):
     # print(ep_id)
@@ -160,6 +163,7 @@ def get_info(source_page: HTML):
 
 if __name__ == '__main__':
     import page as page
+
     source = page.get_page_by_bv("BV1hT4y1R79R")
     with open('test.html', 'w', encoding='utf-8') as f:
         f.write(source)
@@ -167,4 +171,3 @@ if __name__ == '__main__':
 
     source = HTML(source)
     source = get_source_dict(source)
-
