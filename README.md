@@ -24,33 +24,33 @@
 
 ### 示例：
 #### 1. 通过BV号直接下载视频:
-```bash
+```commandline
 python bili.py BV1u841157Us -v 
 ```
 或
-```bash
+```commandline
 python bili.py BV1u841157Us --video
 ```
 #### 2. 通过BV号直接下载视频的音轨:
-```bash
+```commandline
 python bili.py BV1u841157Us -a
 ```
 或
-```bash
+```commandline
 python bili.py BV1u841157Us --audio
 ```
 
 #### 3. 通过BV号直接下载视频封面
-```bash
+```commandline
 python bili.py BV1u841157Us -c
 ```
 或
-```bash
+```commandline
 python bili.py BV1u841157Us --cover
 ```
 
 #### 4. 通过BV号直接下载视频画面（不含音轨）
-```bash
+```commandline
 python bili.py BV1u841157Us -f
 ```
 或
@@ -59,7 +59,7 @@ python bili.py BV1u841157Us --frames
 ```
 
 #### 5. 同时下载画面，音轨，视频，和封面
-```bash
+```commandline
 python bili.py BV1u841157Us -a -f -v -c
 ```
 
@@ -85,7 +85,7 @@ python bili.py BV1u841157Us -a -f -v -c
 
 使用 cookie 可以获得 720P 及以上分辨率的视频。
 
-```bash
+```commandline
 python bili.py BV1u841157Us -v --cookie path/to/cookie.txt
 ```
 
@@ -102,6 +102,6 @@ python bili.py BV1u841157Us -v --cookie path/to/cookie.txt
 
 ## 打包
 
-```bash
+```commandline
 pyinstaller bili.spec
 ```
